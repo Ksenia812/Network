@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="2018 (generated)" id="1607365774934-1">
+        <createTable tableName="community">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="topic" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="moderator_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-2">
+        <createTable tableName="community_has_user">
+            <column name="community_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-3">
+        <createTable tableName="community_message">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="text" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="TIMESTAMP(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="community_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-4">
+        <createTable tableName="credentials">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="login" type="VARCHAR(45)"/>
+            <column name="password" type="VARCHAR(90)"/>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-5">
+        <createTable tableName="message">
+            <column name="date" type="TIMESTAMP(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sender_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receiver_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-6">
+        <createTable tableName="post">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="header" type="VARCHAR(45)"/>
+            <column name="text" type="VARCHAR(45)"/>
+            <column name="wall_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="date"/>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-7">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValue="USER" name="name" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-8">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="surname" type="VARCHAR(45)"/>
+            <column name="birthday" type="date"/>
+            <column name="email" type="VARCHAR(45)"/>
+            <column defaultValueNumeric="1" name="active_status" type="BIT(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-9">
+        <createTable tableName="user_has_friends">
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="friend_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-10">
+        <createTable tableName="user_has_role">
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-11">
+        <createTable tableName="wall">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-12">
+        <addPrimaryKey columnNames="community_id, user_id" constraintName="PRIMARY" tableName="community_has_user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-13">
+        <addPrimaryKey columnNames="user_id, friend_id" constraintName="PRIMARY" tableName="user_has_friends"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-14">
+        <addPrimaryKey columnNames="user_id, role_id" constraintName="PRIMARY" tableName="user_has_role"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-15">
+        <addUniqueConstraint columnNames="name" constraintName="community_name_uindex" tableName="community"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-16">
+        <addUniqueConstraint columnNames="login" constraintName="credentials_login_uindex" tableName="credentials"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-17">
+        <addUniqueConstraint columnNames="email" constraintName="user_email_uindex" tableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-18">
+        <createIndex indexName="community_message_date_index" tableName="community_message">
+            <column descending="true" name="date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-19">
+        <createIndex indexName="fk_community_has_user_community1_idx" tableName="community_has_user">
+            <column name="community_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-20">
+        <createIndex indexName="fk_community_has_user_user1_idx" tableName="community_has_user">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-21">
+        <createIndex indexName="fk_community_message_community1_idx" tableName="community_message">
+            <column name="community_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-22">
+        <createIndex indexName="fk_community_message_user1_idx" tableName="community_message">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-23">
+        <createIndex indexName="fk_community_moderator_index" tableName="community">
+            <column name="moderator_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-24">
+        <createIndex indexName="fk_credentials_user1_idx" tableName="credentials">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-25">
+        <createIndex indexName="fk_message_user1_idx" tableName="message">
+            <column name="receiver_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-26">
+        <createIndex indexName="fk_message_user2_idx" tableName="message">
+            <column name="sender_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-27">
+        <createIndex indexName="fk_post_user1_idx" tableName="post">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-28">
+        <createIndex indexName="fk_post_wall1_idx" tableName="post">
+            <column name="wall_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-29">
+        <createIndex indexName="fk_user_has_friends_user2_idx" tableName="user_has_friends">
+            <column name="friend_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-30">
+        <createIndex indexName="fk_user_has_role_role1_idx" tableName="user_has_role">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-31">
+        <createIndex indexName="fk_user_has_role_user1_idx" tableName="user_has_role">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-32">
+        <createIndex indexName="fk_wall_user1_idx" tableName="wall">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-33">
+        <createIndex indexName="message_date_index" tableName="message">
+            <column descending="true" name="date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-34">
+        <addForeignKeyConstraint baseColumnNames="community_id" baseTableName="community_has_user" constraintName="fk_community_has_user_community1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="community"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-35">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="community_has_user" constraintName="fk_community_has_user_user1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-36">
+        <addForeignKeyConstraint baseColumnNames="community_id" baseTableName="community_message" constraintName="fk_community_message_community1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="community"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-37">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="community_message" constraintName="fk_community_message_user1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-38">
+        <addForeignKeyConstraint baseColumnNames="moderator_id" baseTableName="community" constraintName="fk_community_moderator" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-39">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="credentials" constraintName="fk_credentials_user1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-40">
+        <addForeignKeyConstraint baseColumnNames="receiver_id" baseTableName="message" constraintName="fk_message_user1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-41">
+        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="message" constraintName="fk_message_user2" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-42">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="post" constraintName="fk_post_user1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-43">
+        <addForeignKeyConstraint baseColumnNames="wall_id" baseTableName="post" constraintName="fk_post_wall1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="wall"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-44">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_has_friends" constraintName="fk_user_has_friends_user1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-45">
+        <addForeignKeyConstraint baseColumnNames="friend_id" baseTableName="user_has_friends" constraintName="fk_user_has_friends_user2" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-46">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_has_role" constraintName="fk_user_has_role_role1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-47">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_has_role" constraintName="fk_user_has_role_user1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="2018 (generated)" id="1607365774934-48">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="wall" constraintName="fk_wall_user1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+</databaseChangeLog>
