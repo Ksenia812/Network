@@ -87,13 +87,13 @@ public class ApplicationConfiguration implements WebMvcConfigurer {
         return dataSource;
     }
 
-/*    @Bean
+    @Bean
     public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:liquibase-liquibase-changeLog.xml");
+        liquibase.setChangeLog("classpath:changelog/db.changelog-master.xml");
         liquibase.setDataSource(dataSource());
         return liquibase;
-    }*/
+    }
 
     @Bean
     public JpaTransactionManager transactionManager() {

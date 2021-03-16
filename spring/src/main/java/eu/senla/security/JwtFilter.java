@@ -32,8 +32,6 @@ public class JwtFilter extends GenericFilterBean {
                     && jwtProvider.getUserFromToken(token.get()).getActiveStatus()) {
                 Authentication authentication = jwtProvider.getAuthentication(token.get());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            } else {
-                throw new JwtAuthenticationException();
             }
         } catch (JwtAuthenticationException e) {
             SecurityContextHolder.clearContext();
