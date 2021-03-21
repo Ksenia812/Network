@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CommunityController {
     private CommunityService communityService;
+    private RestTemplateServiceImpl restTemplateService;
 
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @PostMapping("/create")
@@ -28,7 +29,7 @@ public class CommunityController {
     }
 
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-    @GetMapping("/name")
+    @GetMapping("/restTemplate/name")
     public CommunityDTO findCommunityByName(@RequestParam("name") String name) {
         return communityService.findCommunityByName(name);
     }
@@ -55,5 +56,11 @@ public class CommunityController {
     @DeleteMapping("/{id}")
     public void deleteCommunity(@PathVariable("id") Integer id) {
         communityService.deleteById(id);
+    }
+
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+    @GetMapping("/name")
+    public CommunityDTO findCommunityByNames(@RequestParam("name") String name) {
+        return restTemplateService.getCommunityByName(name);
     }
 }
